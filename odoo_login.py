@@ -3,15 +3,15 @@ import odoorpc
 
 class OdooLogin:
 
-    def __init__(self, url, db_name, user, password, odoo=None):
+    def __init__(self, host, db_name, user, password, odoo=None):
         self.db_name = db_name
         self.user = user
         self.password = password
         self.odoo = odoo
-        self.url = url
+        self.host = host
 
     def connect_server(self):
-        self.odoo = odoorpc.ODOO(self.url, port=8016)
+        self.odoo = odoorpc.ODOO(self.host, port=8016)
 
     def database_login(self):
         self.odoo.login(self.db_name, self.user, self.password)
@@ -36,7 +36,7 @@ class FetchData:
 # HERE EN KSERO TI KAMNO RE ZARTILIE
 
 odoo_login = OdooLogin(
-    'http://0.0.0.0:8016',
+    'localhost',
     'DemoDB',
     'admin',
     'admin'
