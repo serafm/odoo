@@ -14,14 +14,18 @@ class OdooLogin:
     def connect_server(self):
         """ Connect to the Odoo server """
         try:
-            self.odoo = odoorpc.ODOO(self.host, port=8069)
+            self.odoo = odoorpc.ODOO(self.host, 'jsonrpc', 8069)
         except Exception as e:
             # Handle the exception
             print(f"Error connecting to the server: {str(e)}")
 
-    def database_login(self):
+    def connect_database(self):
         """ Login in to the database with user credentials"""
-        self.odoo.login(self.db_name, self.user, self.password)
+        try:
+            self.odoo.login(self.db_name, self.user, self.password)
+        except Exception as e:
+            # Handle the exception
+            print(f"Error connecting to the database: {str(e)}")
 
 
 class FetchData:
@@ -34,8 +38,12 @@ class FetchData:
 
     def fetch_data(self):
         """ Retrieve data from the database from the given model name and print the results """
+        # Check if model name exist and retrieve data
         if self.model_name in self.odoo.env:
             self.data = self.odoo.execute(self.model_name, 'read', [], ['name', 'price'])
+            return self.data
+        else:
+            return 'No data found'
 
 
 odoo_login = OdooLogin(
@@ -47,8 +55,10 @@ odoo_login = OdooLogin(
 
 odoo_login.connect_server()
 
-odoo_login.database_login()
+odoo_login.connect_database()
 
 records = FetchData('product.product')
 
-records.fetch_data()
+results = records.fetch_data()
+
+print(results)
