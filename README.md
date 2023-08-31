@@ -22,14 +22,14 @@ of the API functionalities, I proceeded to create a new GitHub repository to tra
 manage, and version-control my code.
 To break down the problem into manageable parts, I divided it 
 into sub-problems. Initially, I focused on establishing a secure 
-connection to the server by developing a dedicated class. Subsequently,
+connection to the server by developing a dedicated class. Then,
 I implemented a separate class to handle the connection to the database.
 Finally, I created a class specifically designed to fetch the required data.
 
 ####  Challenges
 I successfully developed the necessary classes and functions
 for seamless integration and efficient data retrieval.
-However, I encountered a minor setback when attempting to establish a connection with a demo instance database.
+However, I encountered a minor setback when attempting to establish a connection with a demo instance database through the runbot.
 Despite this obstacle, I remained determined to find a solution.
 Although I wasn't able to test the code with a demo Odoo instance database and fetch data in this particular case,
 I gained invaluable knowledge about the Odoo API and its vast potential. This experience helped me acquire
