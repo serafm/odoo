@@ -9,6 +9,7 @@ class ServerDialog:
 
         :param host: The hostname or IP address of the server.
         :param port: The port number used for the server connection.
+        :param odoo: The Odoo server object to be created
         """
         self.host = host
         self.port = port
@@ -42,6 +43,7 @@ class DatabaseLogin:
         :param db_name: Name of the database to connect to.
         :param user: Username for authentication.
         :param password: Password for authentication.
+        :param odoo: Reference to the connected Odoo server object.
         """
         self.db_name = db_name
         self.user = user
@@ -69,6 +71,7 @@ class FetchData:
         Initialize the model name for data retrieval.
 
         :param model_name: Name of the model from which data will be retrieved.
+        :param odoo: Reference to the connected Odoo server object.
         """
         self.model_name = model_name
         self.odoo = odoo
