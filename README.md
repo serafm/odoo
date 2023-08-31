@@ -35,8 +35,8 @@ By following this approach, I was able to effectively address the task's require
 ####  Challenges
 I successfully developed the necessary classes and functions
 for seamless integration and efficient data retrieval.
-However, I encountered a minor setback when attempting to establish a connection with a demo instance server.
+However, I encountered a minor setback when attempting to establish a connection with a demo instance database.
 Despite this obstacle, I remained determined to find a solution.
-Although I wasn't able to test the code with a demo Odoo instance and fetch data in this particular case,
+Although I wasn't able to test the code with a demo Odoo instance database and fetch data in this particular case,
 I gained invaluable knowledge about the Odoo API and its vast potential. This experience helped me acquire
 the skills to connect to servers, databases, and interact with various data using APIs.

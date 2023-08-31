@@ -3,7 +3,7 @@ import odoorpc
 
 class ServerDialog:
 
-    def __init__(self, host, port):
+    def __init__(self, host, port, odoo=None):
         """
         Initialize the ServerDialog class with a host parameter
 
@@ -12,6 +12,7 @@ class ServerDialog:
         """
         self.host = host
         self.port = port
+        self.odoo = odoo
 
     def connect_server(self):
         """
@@ -20,9 +21,11 @@ class ServerDialog:
         :return: Odoo server object
         """
         try:
-            odoo = odoorpc.ODOO(self.host, self.port)
+            self.odoo = odoorpc.ODOO(self.host, 'jsonrpc', self.port, version=16.0)
+            print("host: ", self.odoo.host)
+            print("port: ", self.odoo.port)
             print('Server connected successfully!')
-            return odoo  # Return the connected Odoo server object
+            # return self.odoo  # Return the connected Odoo server object
         except Exception as e:
             # Handle the exception if the connection attempt fails
             print(f"Error connecting to the server: {str(e)}")
@@ -94,24 +97,23 @@ class FetchData:
 
 
 # Server object
-server = ServerDialog('https://50192056-saas-16-4-all.runbot107.odoo.com', 5432)
+server = ServerDialog('https://50201163-16-0-all.runbot154.odoo.com', 5432)
 
 # Connect to the server
-odoo_api = server.connect_server()
-
+server.connect_server()
 
 # Database object with user credentials for login
-database = DatabaseLogin('50192056-saas-16-4-all',
+database = DatabaseLogin('50201163-16-0-all',
                          'admin',
-                         'admin12345',
-                         odoo_api)
+                         'admin1234',
+                         server.odoo)
 
 # Login to database
 database.connect_database()
 
 # Fetch Data object to retrieve data from model name
 fetch = FetchData('product.product',
-                  odoo_api)
+                  server.odoo)
 
 # Fetch data and print results
 fetch.fetch_data()
