@@ -17,7 +17,7 @@ names with the correct credentials for the database you want to access.
 
 #### Approach
 After carefully reading the task's description and requirements, 
-my first step was to thoroughly review the Odoo API documentation. Once I had a clear understanding
+my first step was to review the Odoo API documentation. Once I had a clear understanding
 of the API functionalities, I proceeded to create a new GitHub repository to track my progress,
 manage, and version-control my code.
 To break down the problem into manageable parts, I divided it 
@@ -25,12 +25,6 @@ into sub-problems. Initially, I focused on establishing a secure
 connection to the server by developing a dedicated class. Subsequently,
 I implemented a separate class to handle the connection to the database.
 Finally, I created a class specifically designed to fetch the required data.
-
-**To ensure the effectiveness of my solution, I thoroughly tested my script
-using a demo Odoo instance. By leveraging the runbot tool provided by Odoo
-for testing purposes, I was able to validate the functionality and reliability of my code.
-By following this approach, I was able to effectively address the task's requirements.**
-
 
 ####  Challenges
 I successfully developed the necessary classes and functions
