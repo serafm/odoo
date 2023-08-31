@@ -10,6 +10,10 @@ retrieves a list of products using Odoo RPC.
 - Local server to connect. Replace host and port names.
 - A database to login and fetch data. Replace db name, user and password names. 
 
+
+#### Approach
+
+
 ####  Challenges
 At first, it was a little complex in my mind to understand Odoo API, but I managed to understand it.
 With a step-by-step guidance from the API documentation I created the necessary classes and function for the integration and the fetch of the data, but I had a little problem trying to connect with a local server.
