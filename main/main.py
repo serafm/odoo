@@ -35,7 +35,7 @@ class ServerDialog:
 
 class DatabaseLogin:
 
-    def __init__(self, db_name, user, password):
+    def __init__(self, db_name, user, password, odoo):
         """
         Initialize user credentials for database login.
 
@@ -46,15 +46,16 @@ class DatabaseLogin:
         self.db_name = db_name
         self.user = user
         self.password = password
+        self.odoo = odoo
 
-    def connect_database(self, odoo_login):
+    def connect_database(self):
         """
         Log in to the database using provided user credentials.
 
         :return: None
         """
         try:
-            odoo_login.login(self.db_name, self.user, self.password)
+            self.odoo.login(self.db_name, self.user, self.password)
             print('Logged in database successfully!')
         except Exception as e:
             # Handle the exception if login fails
@@ -63,24 +64,25 @@ class DatabaseLogin:
 
 class FetchData:
 
-    def __init__(self, model_name):
+    def __init__(self, model_name, odoo):
         """
         Initialize the model name for data retrieval.
 
         :param model_name: Name of the model from which data will be retrieved.
         """
         self.model_name = model_name
+        self.odoo = odoo
 
-    def fetch_data(self, odoo_login):
+    def fetch_data(self):
         """
         Retrieve data from the database using the provided model name and print the results.
 
         :return: None
         """
         # Check if the model name exists in the Odoo environment
-        if self.model_name in odoo_login.env:
+        if self.model_name in self.odoo.env:
             # Search and read data for all records, fetching 'name' and 'price' fields
-            data = odoo_login.env[self.model_name]
+            data = self.odoo.env[self.model_name]
             result = data.search_read([], ['name', 'price'])
 
             # Print retrieved results, showing product name and price
@@ -94,22 +96,26 @@ class FetchData:
             return 'No data found'
 
 
+""" Creating objects from classes and calling their functions with the right order to connect, login and fetch data"""
+
 # Server object. Replace host and port with valid ones.
 server = ServerDialog('localhost', 5432)
 
 # Connect to the server
-odoo = server.connect_server()
+odoo_login = server.connect_server()
 
 # Database object with user credentials for login. Replace them with valid names.
 database = DatabaseLogin('db_name',
                          'user',
-                         'password')
+                         'password',
+                         odoo_login)
 
 # Login to database
-database.connect_database(odoo)
+database.connect_database()
 
 # Fetch Data object to retrieve data from model name.
-fetch = FetchData('product.product')
+fetch = FetchData('product.product',
+                  odoo_login)
 
 # Fetch data and print results
-fetch.fetch_data(odoo)
+fetch.fetch_data()
